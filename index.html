@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app = "scopeDemo" >
+  <head>
+    <title>Angular Scope Demo</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
+    <script src = "app.js" ></script>
+  </head>
+
+  <body ng-controller = "ScopeCtrl">
+
+
+    <h1>Angular Scope Demo</h1>
+
+    <p>
+      This interactive demo will show you when different scopes are created by AngularJS.
+    </p>
+
+
+    <h2>Outer Scope</h2>
+
+    <input type = "text" ng-model = "name" >:{{ name }}
+
+    <hr>
+
+
+    <h2>NG-Repeat Scope</h2>
+    <p>
+      This repeats each name in the `names` array.  Each `name` is a different variable inside a different scope.
+    </p>
+
+    <div ng-repeat = "name in names">
+      <div>
+        <input type = "text" ng-model = "name" >:   {{ name }}
+      </div>
+    </div>
+
+
+    <h2>NG-IF Scope</h2>
+    <p>
+      This shows than an `ng-if` directive inherits its parent scope via prototypal inheritance but will override it locally if conflicts arise. Choose whether to display the `ng-if` or not:
+    </p>
+    <div>
+      <p>Activate NG-IF?</p>
+      <label>Show:
+        <input ng-model = "ngIf" type = "radio" value = "true">
+      </label>
+      <label>Do not show:
+        <input ng-model = "ngIf" type = "radio" value = "false">
+      </label>
+      {{ ngIf }}
+    
+      <div ng-if = "ngIf == 'true'" >
+        <input type = "text" ng-model = "name" >:   {{ name }}
+      </div>
+
+    </div>
+
+    <h2>Custom Directive Scope</h2>
+
+    <p>If we don't specify a special "Isolate scope for a directive, it can only be used once in a given controller (otherwise imagine the conflicts that might arise!).  Here, we've specified several types of directive scopes which you should play with:</p>
+
+    <unspecifieddir></unspecifieddir>
+    <twowaydir name="name"></twowaydir>
+    <inheritdir name="name"></inheritdir>
+
+
+  </body>
+</html>
